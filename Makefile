@@ -1,3 +1,5 @@
+OS := $(shell uname)
+
 CEXT_NAME=golf_pixel_array
 CEXT_EXTENSION=.h
 CEXT_PATH=lib/
@@ -11,8 +13,15 @@ CC=clang
 CFLAGS=-shared -isystem include -lc -I../include -I. -fPIC
 PRODUCTION_FLAGS=-O2
 DEBUG_FLAGS=-g -O0
-DYLIB_PATH=native/macos/
-DYLIB_EXTENSION=.dylib
+#DYLIB_PATH=native/macos/
+#DYLIB_EXTENSION=.dylib
+ifeq ($(OS),Darwin)
+	DYLIB_PATH=native/macos/
+	DYLIB_EXTENSION=.dylib
+else
+	DYLIB_PATH=native/linux-amd64/
+	DYLIB_EXTENSION=.so
+endif
 DYLIB_DSYM=.dSYM
 
 golf_pixel_array:
