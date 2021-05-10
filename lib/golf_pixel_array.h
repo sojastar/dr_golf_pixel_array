@@ -62,12 +62,3 @@ void clear_pixel_array(void);
 // --- Single Pixels :
 uint32_t  get_pixel_at(size_t x,size_t y);
 void      set_pixel_at(size_t x,size_t y,uint32_t color);
-
-
-
-
-
-/******************************************************************************/
-/* GLOBAL VARIABLES :                                                         */
-/******************************************************************************/
-PixelArray*  pixel_array;
