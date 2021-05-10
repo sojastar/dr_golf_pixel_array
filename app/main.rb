@@ -8,10 +8,17 @@ require 'lib/golf_pixel_array.rb'
 # 1. SETUP :
 ################################################################################
 def setup(args)
+  # Setup :
   args.state.pxa        = Golf::PixelArray.new( 512, 232, # x and y position
                                                 64, 64,   # width and height
                                                 4 )       # scale
-  args.state.pxa.sp(32,32,0xFF0000FF)
+
+  # Set a pixel :
+  args.state.pxa.sp 32, 32, 0xFF0000FF
+
+  # Get a pixel :
+  puts args.state.pxa.gp 32, 32
+
   args.state.setup_done = true
 end
 
