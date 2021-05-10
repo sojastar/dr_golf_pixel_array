@@ -1,5 +1,4 @@
 #include <stddef.h>
-#include <stdint.h>
 #include "golf_pixel_array-bridge.h"
 #include "golf_pixel_array.h"
 
@@ -36,8 +35,9 @@ void bridge_clear_pixel_array(void) {
 }
 
 // --- Single Pixels :
-int bridge_get_pixel_at(int x,int y) {
-  return (int)get_pixel_at((size_t)x, (size_t)y);
+uint32_t bridge_get_pixel_at(int x,int y) {
+  //return (unsigned int)get_pixel_at((size_t)x, (size_t)y);
+  return (unsigned int)get_pixel_at((size_t)x, (size_t)y);
 }
 
 void bridge_set_pixel_at(int x,int y,int color) {

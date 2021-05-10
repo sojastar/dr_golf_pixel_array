@@ -1,3 +1,5 @@
+#include <stdint.h>
+
 /******************************************************************************/
 /* DATA TYPES :                                                               */
 /******************************************************************************/
@@ -32,6 +34,5 @@ void bridge_update_pixel_array(void);
 void bridge_clear_pixel_array(void);
 
 // --- Single Pixels :
-int   bridge_get_pixel_at(int x,int y);
-void  bridge_set_pixel_at(int x,int y,int color);
-
+uint32_t  bridge_get_pixel_at(int x,int y);
+void      bridge_set_pixel_at(int x,int y,int color);
