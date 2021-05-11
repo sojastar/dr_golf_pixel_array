@@ -62,3 +62,6 @@ void clear_pixel_array(PixelArray* pixel_array);
 // --- Single Pixels :
 uint32_t  get_pixel_at(PixelArray* pixel_array,size_t x,size_t y);
 void      set_pixel_at(PixelArray* pixel_array,size_t x,size_t y,uint32_t color);
+
+// --- Copy :
+void copy_area(PixelArray* src,PixelArray* dest,size_t sx,size_t sy,size_t sw,size_t sh,size_t dx,size_t dy);
