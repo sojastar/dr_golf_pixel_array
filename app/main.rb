@@ -16,8 +16,8 @@ def setup(args)
                                           4 )             # scale
 
   args.state.pa2  = Golf::PixelArray.new( 600, 600,
-                                          width>>2, height>>2,
-                                          1 )
+                                          width, height,
+                                          1, "pxarr2")
 
   # Set some pixels :
   height.times do |y|
@@ -30,9 +30,9 @@ def setup(args)
   puts args.state.pa1.gp 32, 32
 
   # Copy some pixels :
-  args.state.pa2.cp 0, 0,
-                    args.state.pa1,
-                    32, 32, 16, 16
+  # args.state.pa2.cp 0, 0,
+  #                   args.state.pa1,
+  #                   32, 32, 16, 16
 
   args.state.setup_done = true
 end
@@ -49,7 +49,7 @@ def tick(args)
 
   # !!! DON'T FORGET TO RENDER THE PIXEL ARRAY !!!
   args.state.pa1.render(args)
-  #args.state.pa2.render(args)
+  args.state.pa2.render(args)
   # !!! DON'T FORGET TO RENDER THE PIXEL ARRAY !!!
 
 end

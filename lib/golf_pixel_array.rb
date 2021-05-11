@@ -5,10 +5,11 @@ module Golf
               #:c_pixel_array
 
   class PixelArray
-    def initialize(x,y,width,height,scale)
-      @c_pixel_array  = FFI::GolfPixelArray::new_pixel_array(width, height)
+    def initialize(x,y,width,height,scale,name="pixel_array")
+      @c_pixel_array  = FFI::GolfPixelArray::new_pixel_array(width, height, name)
 
       @x, @y          = x, y
+      @name = name
 
       @width          = width
       @height         = height
@@ -30,7 +31,7 @@ module Golf
                                   @y,
                                   @render_width,
                                   @render_height,
-                                  :pixel_array].sprite
+                                  @name.to_sym].sprite
     end
 
     def c
