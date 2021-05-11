@@ -42,23 +42,23 @@ typedef struct PixelArray {
 /******************************************************************************/
 
 // --- Creator and Destructor :
-void init_pixel_array(size_t width,size_t height);
-void free_pixel_array(void);
+PixelArray* new_pixel_array(size_t width,size_t height);
+void free_pixel_array(PixelArray* pixel_array);
 
 
 // --- Geometry Management :
-size_t get_pixel_array_width(void);
-size_t get_pixel_array_height(void);
+size_t get_pixel_array_width(PixelArray* pixel_array);
+size_t get_pixel_array_height(PixelArray* pixel_array);
 
 
 // --- Update :
-void update_pixel_array(void);
+void update_pixel_array(PixelArray* pixel_array);
 
 
 // --- Drawing :
 // --- Clearing the console :
-void clear_pixel_array(void);
+void clear_pixel_array(PixelArray* pixel_array);
 
 // --- Single Pixels :
-uint32_t  get_pixel_at(size_t x,size_t y);
-void      set_pixel_at(size_t x,size_t y,uint32_t color);
+uint32_t  get_pixel_at(PixelArray* pixel_array,size_t x,size_t y);
+void      set_pixel_at(PixelArray* pixel_array,size_t x,size_t y,uint32_t color);
