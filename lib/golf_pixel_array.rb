@@ -49,9 +49,11 @@ module Golf
     end
 
     def cp(x,y,source,source_x,source_y,source_w,source_h)
-      puts "source: #{source.c_pixel_array}"
-      puts "dest(self): #{@c_pixel_array}"
-      puts "x:#{x} - y:#{y} - sx:#{source_x} - sy:#{source_y} - sw:#{source_w} - sh:#{source_h}"
+      if !$gtk.production
+        puts "source: #{source.c_pixel_array}"
+        puts "dest(self): #{@c_pixel_array}"
+        puts "x:#{x} - y:#{y} - sx:#{source_x} - sy:#{source_y} - sw:#{source_w} - sh:#{source_h}"
+      end
       FFI::GolfPixelArray::copy_area( source.c_pixel_array,
                                       @c_pixel_array,
                                       source_x,

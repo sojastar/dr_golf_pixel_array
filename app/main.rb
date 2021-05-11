@@ -15,9 +15,9 @@ def setup(args)
                                           width, height,  # width and height
                                           4 )             # scale
 
-  args.state.pa2  = Golf::PixelArray.new( 600, 600,
+  args.state.pa2  = Golf::PixelArray.new( 550, 550,
                                           width, height,
-                                          1, "pxarr2")
+                                          2, "pxarr2")
 
   # Set some pixels :
   height.times do |y|
@@ -30,16 +30,16 @@ def setup(args)
   puts args.state.pa1.gp 32, 32
 
   # Copy some pixels :
-  # args.state.pa2.cp 0, 0,
-  #                   args.state.pa1,
-  #                   32, 32, 16, 16
+  args.state.pa2.cp 0, 0,
+                    args.state.pa1,
+                    0, 0, 64, 64
 
   args.state.setup_done = true
 end
 
 
 
-
+$gtk.reset
 
 ################################################################################
 # 2. MAIN LOOP :

@@ -1,4 +1,6 @@
 #include "golf_pixel_array.h"
+#include <stdint.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
@@ -76,7 +78,50 @@ void set_pixel_at(PixelArray *pixel_array, size_t x, size_t y, uint32_t color) {
 
 void copy_area(PixelArray *src, PixelArray *dest, size_t sx, size_t sy,
                size_t sw, size_t sh, size_t dx, size_t dy) {
+  int errcode = 0;
+  if (dy + sh > dest->height) {
+    printf("\x1b[1;31m[DESTERR]> Tried to cp to a part of the array that is "
+           "too low: max %lu, dy = %lu, sh = %lu\x1b[0m\n",
+           dest->height, dy, sh);
+    errcode = 1;
+  }
+  if (dx + sw > dest->width) {
+    printf("\x1b[1;31m[DESTERR]> Tried to cp to a part of the array that is "
+           "too far: max %lu, dx = %lu, sw = %lu\x1b[0m\n",
+           dest->width, dx, sw);
+    errcode = 1;
+  }
+  if (sy + sh > src->height) {
+    printf("\x1b[1;31m[SRCERR]> Tried to cp a part of the array that is too "
+           "low: max %lu, sy = %lu, sh = %lu\x1b[0m\n",
+           src->height, sy, sh);
+    errcode = 1;
+  }
+  if (sx + sw > src->width) {
+    printf("\x1b[1;31m[SRCERR]> Tried to cp a part of the array that is too "
+           "far: max %lu, sx = %lu, sw = %lu\x1b[0m\n",
+           src->width, sx, sw);
+    errcode = 1;
+  }
+
+#if DEBUG_BUILD
+  printf("\x1b[1;34m[SRCDBG][INFO]> X max %lu, sx = %lu, sw = %lu, sum = "
+         "%lu\x1b[0m\n",
+         src->width, sx, sw, sx + sw);
+  printf("\x1b[1;34m[SRCDBG][INFO]> Y max %lu, sx = %lu, sw = %lu, sum = "
+         "%lu\x1b[0m\n",
+         src->height, sy, sh, sy + sh);
+  printf("\x1b[1;34m[DSTDBG][INFO]> X max %lu, sx = %lu, sw = %lu, sum = "
+         "%lu\x1b[0m\n",
+         dest->width, dx, sw, dx + sw);
+  printf("\x1b[1;34m[DSTDBG][INFO]> Y max %lu, sx = %lu, sw = %lu, sum = "
+         "%lu\x1b[0m\n",
+         dest->height, dy, sh, dy + sh);
+#endif
+
+  if (errcode)
+    return;
   for (size_t i = 0; i < sh; ++i)
-    memcpy(dest->pixels + (sx + sw * (i + sy)),
-           src->pixels + (dx + sw * (i + dy)), sw * sizeof(uint32_t));
+    memcpy(dest->pixels + dx + ((dy + i) * dest->width),
+           src->pixels + dx + ((sy + i) * src->width), sw * sizeof(uint32_t));
 }
